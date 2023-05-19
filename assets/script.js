@@ -1,6 +1,20 @@
 // Wrap all code that interacts with the DOM in a call to jQuery to ensure that
 // the code isn't run until the browser has finished rendering all the elements
 // in the html.
+
+ // Your Day.js locale Object.
+const locale = {};
+dayjs.locale(locale, null, true);
+dayjs.format('DD/MM/YYYY')
+
+// defining variables that i will use
+let date = document.querySelector('#currentDay');
+let time = document.querySelector('#currentTime');
+let hour = document.querySelector('#hour');
+let now = dayjs();
+let currentHour = now.format('H');
+let save = $('.saveBtn');
+
 $(function () {
     // TODO: Add a listener for click events on the save button. This code should
     // use the id in the containing time-block as a key to save the user input in
@@ -20,5 +34,8 @@ $(function () {
     // attribute of each time-block be used to do this?
     //
     // TODO: Add code to display the current date in the header of the page.
-    $("#currentDay").text(dayjs().format("dddd, MMMM DD"));
+    setInterval(function () {
+      date.textContent = dayjs().format('MMMM/DD/YYYY');
+      time.textContent = dayjs().format('hh:mm:ss a');
+    }, 1000);
   });
